@@ -15,3 +15,14 @@ module "sg" {
   sg_gn       = module.annad[each.key].kuldeep #ballu        # implicit depenency lga raha hai upper vala module ka sath
   sg_location = module.annad[each.key].varun   #east us
 } 
+
+module "vnet_child" {
+  source = "./child module/Vnet"
+  for_each = var.network_var
+  vnet_name = each.value.name
+  vnet_dns = each.value.dns_servers
+  vnet_ip = each.value.address_space
+  vnet_rg_location = module.annad[each.key].varun
+  vnet_rg_name = module.annad[each.key].kuldeep
+
+}
