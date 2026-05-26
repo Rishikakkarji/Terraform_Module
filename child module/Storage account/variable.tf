@@ -11,5 +11,8 @@ variable "sg_gn" {
     type = string
 }
 variable "sg_location" {
-  
+  type = string
 }
+
+
+

@@ -10,6 +10,9 @@ variable "vnet_rg_name" {
 variable "vnet_ip" {
   type = list(string)
 }
+
+
 variable "vnet_dns" {
-    type = list(string)  
+    type = list(string) 
+
 }
