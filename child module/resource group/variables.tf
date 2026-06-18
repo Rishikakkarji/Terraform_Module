@@ -1,8 +1,7 @@
 variable "rg_name" {
-    type = string
+    type = map(object({
+        name = string
+        location = string
+    }))
   
-}
-
-variable "rg_location" {
-    type = string
 }
