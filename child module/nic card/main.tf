@@ -1,12 +1,13 @@
 resource "azurerm_network_interface" "vm_nic" {
-  name                = "${var.vm}-nic"
-  location            = var.nic_location
-  resource_group_name = var.nic_rg
+  for_each = var.nic
+  name                = "${each.value.nic_name}-nic"
+  location            = each.value.location
+  resource_group_name = each.value.resource_group_name
 
   ip_configuration {
-    name                          = var.ip_configuration
-    subnet_id                     = var.subnet_id
-    private_ip_address_allocation = var.allocation_type
-    public_ip_address_id          = var.pub_id
+    name                          = each.value.ip_name
+    subnet_id                     = data.azurerm_subnet.subnet_id[each.key].id
+    private_ip_address_allocation = each.value.private_ip_address_allocation
+    public_ip_address_id          = data.azurerm_public_ip.public_id[each.key].id
   }
 }

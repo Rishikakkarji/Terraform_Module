@@ -30,6 +30,17 @@ subnet = {
   }
 }
 
+
+pub = {
+  "pub_prod" = {
+      name = "vm_public_ip_nginx"
+      resource_group_name = "todo-rg"
+      location = "centralindia"
+      allocation_method = "Static"
+
+  }
+}
+
 # nsg_detail = {
 #   "prod" = {
 #     name                       = "nsgfornic"
@@ -63,12 +74,6 @@ subnet = {
 
 
 
-# public_ip_vm_linux = {
-#   "prod" = {
-#     name              = "vm_public_ip_nginx"
-#     allocation_method = "Static"
 
-#   }
-# }
 
 

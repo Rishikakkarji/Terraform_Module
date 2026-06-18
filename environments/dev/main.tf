@@ -38,18 +38,20 @@ module "subnet" {
 
 
 # # Nic Module
-# module "vm_nic" {
-#   source           = "../../child module/nic card"
-#   for_each         = var.vm_nic
-#   vm               = each.value.name
-#   nic_location     = module.rg[each.key].prod_rg_location
-#   nic_rg           = module.rg[each.key].prod_rg_name
-#   ip_configuration = each.value.ip_configuration_name
-#   subnet_id        = module.subnet[each.key].subnet_id
-#   allocation_type  = each.value.private_ip_address_allocation
-#   pub_id           = module.publicip[each.key].public_ip
+module "vm_nic" {
+  source           = "../../child module/nic card"
+  depends_on = [ module.subnet ]
+  nic = var.nic
 
-# }
+}
+
+# Public IP for vm
+module "publicip" {
+  source         = "../../child module/public ip"
+  depends_on = [ module.subnet ]
+  pub = var.pub
+
+}
 
 # # Linux Module
 # module "Linux_vm" {
@@ -109,15 +111,7 @@ module "subnet" {
 
 # }
 
-# module "publicip" {
-#   source         = "../../child module/public ip"
-#   for_each       = var.public_ip_vm_linux
-#   public_ip_name = each.value.name
-#   rg-name        = module.rg[each.key].prod_rg_name
-#   rg-location    = module.rg[each.key].prod_rg_location
-#   static_dynamic = each.value.allocation_method
 
-# }
 
 # resource "azurerm_network_interface_security_group_association" "example" {
 #   network_interface_id      = module.vm_nic["prod"].nic_id

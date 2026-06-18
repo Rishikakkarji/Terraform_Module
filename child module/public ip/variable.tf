@@ -1,15 +1,9 @@
-variable "public_ip_name" {
-  
-}
-
-variable "rg-name" {
-  
-}
-
-variable "rg-location" {
-  
-}
-
-variable "static_dynamic" {
+variable "pub" {
+    type = map(object({
+      name = string
+      resource_group_name = string
+      location = string
+      allocation_method = string
+    }))
   
 }

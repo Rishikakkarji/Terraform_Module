@@ -10,14 +10,10 @@ variable "vnet" {}
 variable "subnet" {}
 
 
-# variable "vm_nic" {
-#   type = map(object({
-#     name                          = string
-#     ip_configuration_name         = string
-#     private_ip_address_allocation = string
+variable "nic" {}
 
-#   }))
-# }
+
+variable "pub" {}
 
 # variable "vm_linux_app" {
 #   type = map(object({
@@ -66,10 +62,3 @@ variable "subnet" {}
 # }
 
 
-# variable "public_ip_vm_linux" {
-#   type = map(object({
-#     name              = string
-#     allocation_method = string
-#   }))
-
-# }
