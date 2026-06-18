@@ -21,29 +21,20 @@ module "sg_container" {
 
 }
 
-# #Vnet Module
-# module "vnet_child" {
-#   source           = "../../child module/vnet"
-#   for_each         = var.network_var
-#   vnet_name        = each.value.name
-# vnet_dns         = each.value.dns_servers
-#   vnet_ip          = each.value.address_space
-#   vnet_rg_location = module.rg[each.key].prod_rg_location
-#   vnet_rg_name     = module.rg[each.key].prod_rg_name
-
-# }
+#Vnet Module
+module "vnet_child" {
+  source = "../../child module/vnet"
+  depends_on = [ module.rg ]
+  vnet   = var.vnet
+}
 
 
-# # Subnet Module
-# module "subnet" {
-#   source          = "../../child module/subnet"
-#   for_each        = var.vnet_subnet_net
-#   vnet_subnet     = each.value.name
-#   subnet_sg       = module.rg["prod"].prod_rg_name
-#   network_name    = module.vnet_child["prod"].vnet
-#   subnet_ip_scope = each.value.subnet_ip_scope
-
-# }
+# Subnet Module
+module "subnet" {
+  source          = "../../child module/subnet"
+  depends_on = [ module.vnet_child ]
+  subnet = var.subnet
+}
 
 
 # # Nic Module

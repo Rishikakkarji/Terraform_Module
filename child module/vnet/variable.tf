@@ -1,18 +1,10 @@
-variable "vnet_name" {
-  type = string
-}
-variable "vnet_rg_location" {
-  type = string
-}
-variable "vnet_rg_name" {
-  type = string
-}
-variable "vnet_ip" {
-  type = list(string)
-}
-
-
-variable "vnet_dns" {
-    type = list(string) 
-
+variable "vnet" {
+  description = "A map for vnet resources"
+  type = map(object({
+    name = string
+    location = string
+    resource_group_name = string
+    address_space = list(string)
+    dns_servers = list(string)
+  }))
 }

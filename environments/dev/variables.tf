@@ -5,21 +5,9 @@ variable "sg_map" {}
 variable "sg_container" {}
 
 
-# variable "network_var" {
+variable "vnet" {}
 
-#   type = map(object({
-#     name          = string
-#     address_space = list(string)
-#     dns_servers   = list(string) #  toh vaha pa list use hoti hai ["10.0.0.0/16"]
-#   }))
-# }
-
-# variable "vnet_subnet_net" {
-#   type = map(object({
-#     name            = string
-#     subnet_ip_scope = list(string)
-#   }))
-# }
+variable "subnet" {}
 
 
 # variable "vm_nic" {
