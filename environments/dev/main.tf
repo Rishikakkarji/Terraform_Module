@@ -37,14 +37,6 @@ module "subnet" {
 }
 
 
-# # Nic Module
-module "vm_nic" {
-  source     = "../../child module/nic card"
-  depends_on = [module.publicip, module.subnet]
-  nic        = var.nic
-
-}
-
 # Public IP for vm
 module "publicip" {
   source     = "../../child module/public ip"
@@ -53,9 +45,19 @@ module "publicip" {
 
 }
 
+# # Nic Module
+module "vm_nic" {
+  source     = "../../child module/nic card"
+  depends_on = [module.publicip, module.subnet]
+  nic        = var.nic
+
+}
+
+
+
 module "nsg" {
   source     = "../../child module/nsg"
-  depends_on = [module.rg]
+  depends_on = [module.rg, module.vm_nic]
   nsg        = var.nsg
   nsg_rules  = var.nsg_rule
 }
@@ -63,7 +65,7 @@ module "nsg" {
 # Linux Module
 module "Linux_vm" {
   source     = "../../child module/vm/linux"
-  depends_on = [module.publicip]
+  depends_on = [module.publicip, module.nsg]
   vm_linux   = var.vm_linux
 }
 
@@ -76,9 +78,16 @@ module "bastion" {
 
 module "peering" {
   source  = "../../child module/vpc peering"
-  depends_on = [ module.vnet_child ]
+  depends_on = [ module.vnet_child, var.subnet ]
   peering = var.peering
 
+}
+
+module "nsg-to-nic" {
+  source = "../../child module/attach-nsg-to-nic"
+  depends_on = [ module.nsg, module.vm_nic ]
+  nsg-to-nic = var.nsg-to-nic
+  
 }
 
 # output "publicip_terminal" {

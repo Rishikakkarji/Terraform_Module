@@ -33,7 +33,7 @@ vm_linux = {
     storage_account_type = "Standard_LRS"
 
     # data block variable value below
-    nic_name = "vm_nic"
+    nic_name = "vm_nic-nic"
     rg_name  = "todo-rg"
 
   }

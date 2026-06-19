@@ -50,7 +50,7 @@ subnet = {
     address_prefixes     = ["172.0.2.0/24"]
   }
   Subnet_dev3 = {
-    name                 = "databasesubnet"
+    name                 = "AzureBastionSubnet"
     resource_group_name  = "todo-rg"
     virtual_network_name = "dev_network"
     address_prefixes     = ["172.0.3.0/24"]
@@ -128,10 +128,10 @@ bastion = {
     location = "centralindia"
 
     # below is ipconfiguration
-    ip_conf_name   = "pudbastion"
+    ip_conf_name   = "pubbastion"
     pub_name       = "vm_public_ip_nginx"
     pub_rg_name    = "todo-rg"
-    sub_name       = "frontendsubnet"
+    sub_name       = "AzureBastionSubnet"
     subnet_rg_name = "todo-rg"
     vnet_name      = "dev_network"
   }
@@ -154,6 +154,17 @@ peering = {
     vnet_rg = "todo-rg"
   }
 
+}
+nsg-to-nic = {
+  nsg = {
+      nsg_name = "vmnsgformyprivateserver"
+      nsg_rg = "todo-rg"
+
+      # nic below
+      nic_name = "vm_nic-nic"
+      nic_rg = "todo-rg"
+
+  }
 }
 
 

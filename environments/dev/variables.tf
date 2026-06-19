@@ -21,3 +21,5 @@ variable "vm_linux" {}
 variable "bastion" {}
 
 variable "peering" {}
+
+variable "nsg-to-nic" {}
