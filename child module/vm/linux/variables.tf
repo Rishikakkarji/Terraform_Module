@@ -1,69 +1,26 @@
-variable "vm_name" {
-    type = string 
-}
+variable "vm_linux" {
+  type = map(object({
+    name                            = string
+    location                        = string
+    size                            = string
+    admin_username                  = string
+    admin_password                  = string
+    disable_password_authentication = bool
+    # custom_data                     = string
+    publisher                       = string
+    offer                           = string
+    sku                             = string
+    version                         = string
+    os_name                         = string
+    caching                         = string
+    storage_account_type            = string
+    
 
-variable "vm_rg_location" {
-    type = string 
-}
-
-variable "vm_rg_name" {
-    type = string 
-}
-
-
-variable "interface_id" {
-  type = list(string)
-}
-variable "vm_size" {
-  type = string
-}
-variable "image_pub" {
-  type = string
-}
-variable "image_offer" {
-  type = string
-}
-variable "image_sku" {
-  type = string
-}
-variable "image_version" {
-  type = string
-}
-variable "os_disk" {
-  type = string
-}
-variable "os_caching" {
-  type = string
-}
-
-variable "os_option" {
-  type = string
-}
-
-variable "disk_type" {
-  type = string
-}
-
-variable "os_name" {
-  type = string
-}
-
-variable "os_user_name" {
-  type = string
-}
-
-variable "os_user_password" {
-  type = string
-}
-
-variable "profile_config" {
-  type = string
-}
-
-variable "custom_data" {
-  type = string
-}
+    #data block variable define below:
+    nic_name = string
+    rg_name = string
 
 
+  }))
 
-
+}

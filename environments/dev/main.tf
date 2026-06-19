@@ -60,50 +60,13 @@ module "nsg" {
   nsg_rules  = var.nsg_rule
 }
 
-# # Linux Module
-# module "Linux_vm" {
-#   source   = "../../child module/vm/linux"
-#   for_each = var.vm_linux_app
+# Linux Module
+module "Linux_vm" {
+  source     = "../../child module/vm/linux"
+  depends_on = [module.publicip]
+  vm_linux   = var.vm_linux
+}
 
-#   #VM Configuration is below
-#   vm_name        = each.value.name
-#   vm_rg_location = module.rg[each.key].prod_rg_location
-#   vm_rg_name     = module.rg[each.key].prod_rg_name
-#   interface_id   = [module.vm_nic[each.key].nic_id]
-#   vm_size        = each.value.vm_size
-
-#   # Storage part start from below
-#   image_pub     = each.value.publisher
-#   image_offer   = each.value.offer
-#   image_sku     = each.value.sku
-#   image_version = each.value.version
-
-#   # Storage OS DISK Below
-#   os_disk    = each.value.os_name
-#   os_caching = each.value.caching
-#   os_option  = each.value.create_option
-#   disk_type  = each.value.managed_disk_type
-
-#   # OS profile is below
-#   os_name          = each.value.computer_name
-#   os_user_name     = each.value.admin_username
-#   os_user_password = each.value.admin_password
-
-#   # OS Profile Linux config
-#   profile_config = each.value.disable_password_authentication
-
-#   custom_data = base64encode(
-#     file("${path.module}/../../child module/scripts/nginx.sh")
-#   )
-
-# }
-
-
-
-# resource "azurerm_network_interface_security_group_association" "example" {
-#   network_interface_id      = module.vm_nic["prod"].nic_id
-#   network_security_group_id = module.nsg_attach_nic["prod"].nsg_id
-# }
 
 
 # output "publicip_terminal" {

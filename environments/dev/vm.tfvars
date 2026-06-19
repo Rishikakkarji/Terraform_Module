@@ -1,5 +1,5 @@
 nic = {
-  "prod" = {
+  "nic_prod" = {
     nic_name                      = "vm_nic"
     location                      = "centralindia"
     resource_group_name           = "todo-rg"
@@ -14,26 +14,27 @@ nic = {
   }
 }
 
-# vm_linux_app = {
-#   "prod" = {
-#     name    = "todo-app-azure-vm"
-#     vm_size = "Standard_D2ls_v5"
+vm_linux = {
+  "vm_prod" = {
+    name                            = "todo-app-azure-vm"
+    location                        = "centralindia"
+    size                            = "Standard_D2ls_v5"
+    admin_username                  = "ubuntu"
+    admin_password                  = "Azure@12345"
+    disable_password_authentication = false
 
-#     publisher = "Canonical"
-#     offer     = "0001-com-ubuntu-server-jammy"
-#     sku       = "22_04-lts"
-#     version   = "latest"
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
 
-#     os_name           = "mydisk"
-#     caching           = "ReadWrite"
-#     create_option     = "FromImage"
-#     managed_disk_type = "Standard_LRS"
+    os_name              = "mydisk"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
 
-#     computer_name  = "ubuntu-hostname"
-#     admin_username = "ubuntu"
-#     admin_password = "Azure@12345"
+    # data block variable value below
+    nic_name = "vm_nic"
+    rg_name = "todo-rg"
 
-#     disable_password_authentication = false
-
-#   }
-# }
+  }
+}

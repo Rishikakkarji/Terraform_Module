@@ -1,30 +1,30 @@
-# resource "azurerm_linux_virtual_machine" "vm_linux" {
+resource "azurerm_linux_virtual_machine" "vm_linux" {
+  for_each            = var.vm_linux
+  name                = "${each.value.name}-vm-app"
+  location            = each.value.location
+  resource_group_name = data.azurerm_network_interface.nic_id[each.key].resource_group_name
 
-#   name                = "${var.vm_name}-vm-app"
-#   location            = var.vm_rg_location
-#   resource_group_name = var.vm_rg_name
+  size = each.value.size
 
-#   size = var.vm_size
+  network_interface_ids = [data.azurerm_network_interface.nic_id[each.key].id]
 
-#   network_interface_ids = var.interface_id
+  admin_username = each.value.admin_username
+  admin_password = each.value.admin_password
 
-#   admin_username = var.os_user_name
-#   admin_password = var.os_user_password
+  disable_password_authentication = each.value.disable_password_authentication
 
-#   disable_password_authentication = false
+  # custom_data = each.value.custom_data
 
-#   custom_data = var.custom_data
+  source_image_reference {
+    publisher = each.value.publisher
+    offer     = each.value.offer
+    sku       = each.value.sku
+    version   = each.value.version
+  }
 
-#   source_image_reference {
-#     publisher = var.image_pub
-#     offer     = var.image_offer
-#     sku       = var.image_sku
-#     version   = var.image_version
-#   }
-
-#   os_disk {
-#     name                 = var.os_disk
-#     caching              = var.os_caching
-#     storage_account_type = var.disk_type
-#   }
-# }
+  os_disk {
+    name                 = each.value.os_name
+    caching              = each.value.caching
+    storage_account_type = each.value.storage_account_type
+  }
+}
