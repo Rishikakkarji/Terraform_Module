@@ -42,39 +42,60 @@ pub = {
 }
 
 nsg = {
-  "ssh" = {
-    name                       = "vm_nsg"
-    location                   = "centralindia"
-    resource_group_name        = "todo-rg"
-    security_name              = "Allow the ssh"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    destination_port_range     = "22"
-    source_port_range          = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
+  "nsg_name" = {
+    name                = "vmnsgformyprivateserver"
+    location            = "centralindia"
+    resource_group_name = "todo-rg"
+
   }
-
-  "http" = {
-    name                       = "vm_nsg"
-    location                   = "centralindia"
-    resource_group_name        = "todo-rg"
-    security_name              = "Allow the http"
-    priority                   = 101
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    destination_port_range     = "80"
-    source_port_range          = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-
-
 }
+
+nsg_rule = {
+  allowssh = {
+    security_name               = "Allowthessh"
+    priority                    = 100
+    direction                   = "Inbound"
+    access                      = "Allow"
+    protocol                    = "Tcp"
+    destination_port_range      = "22"
+    source_port_range           = "*"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+    resource_group_name         = "todo-rg"
+    network_security_group_name = "vmnsgformyprivateserver"
+  }
+  allowhttp = {
+    security_name               = "Allowthehttp"
+    priority                    = 101
+    direction                   = "Inbound"
+    access                      = "Allow"
+    protocol                    = "Tcp"
+    destination_port_range      = "80"
+    source_port_range           = "*"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+    resource_group_name         = "todo-rg"
+    network_security_group_name = "vmnsgformyprivateserver"
+
+  }
+
+  allowhttps = {
+    security_name               = "Allowthehttps"
+    priority                    = 102
+    direction                   = "Inbound"
+    access                      = "Allow"
+    protocol                    = "Tcp"
+    destination_port_range      = "443"
+    source_port_range           = "*"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+    resource_group_name         = "todo-rg"
+    network_security_group_name = "vmnsgformyprivateserver"
+
+  }
+}
+
+
 
 
 

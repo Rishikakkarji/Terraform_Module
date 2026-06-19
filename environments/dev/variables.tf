@@ -16,6 +16,7 @@ variable "nic" {}
 variable "pub" {}
 
 variable "nsg" {}
+variable "nsg_rule" {}
 
 # variable "vm_linux_app" {
 #   type = map(object({

@@ -40,7 +40,7 @@ module "subnet" {
 # # Nic Module
 module "vm_nic" {
   source     = "../../child module/nic card"
-  depends_on = [module.subnet]
+  depends_on = [module.publicip, module.subnet]
   nic        = var.nic
 
 }
@@ -54,8 +54,10 @@ module "publicip" {
 }
 
 module "nsg" {
-  source = "../../child module/nsg"
-  nsg    = var.nsg
+  source     = "../../child module/nsg"
+  depends_on = [module.rg]
+  nsg        = var.nsg
+  nsg_rules  = var.nsg_rule
 }
 
 # # Linux Module
