@@ -6,9 +6,11 @@ data "azurerm_subnet" "subnet_id" {
 
 }
 
-data "azurerm_public_ip" "public_id" {
-  for_each            = var.nic
-  resource_group_name = each.value.pub_rg
-  name                = each.value.pub_name
-}
+
+## i comment it out becuase the public ip will be assigned to azure bastion.
+# data "azurerm_public_ip" "public_id" {
+#   for_each            = var.nic
+#   resource_group_name = each.value.pub_rg
+#   name                = each.value.pub_name
+# }
 

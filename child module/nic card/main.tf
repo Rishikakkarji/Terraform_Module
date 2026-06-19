@@ -8,6 +8,6 @@ resource "azurerm_network_interface" "vm_nic" {
     name                          = each.value.ip_name
     subnet_id                     = data.azurerm_subnet.subnet_id[each.key].id
     private_ip_address_allocation = each.value.private_ip_address_allocation
-    public_ip_address_id          = data.azurerm_public_ip.public_id[each.key].id
+    # public_ip_address_id          = data.azurerm_public_ip.public_id[each.key].id ## i have attach to azurerm bastion
   }
 }

@@ -9,7 +9,7 @@ nic = {
     subnet_rg                     = "todo-rg"
     pub_rg                        = "todo-rg"
     pub_name                      = "vm_public_ip_nginx"
-    vn_name                       = "private_network"
+    vn_name                       = "prod_network"
 
   }
 }
@@ -34,7 +34,7 @@ vm_linux = {
 
     # data block variable value below
     nic_name = "vm_nic"
-    rg_name = "todo-rg"
+    rg_name  = "todo-rg"
 
   }
 }

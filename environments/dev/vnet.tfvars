@@ -1,32 +1,59 @@
 vnet = {
   vnet_prod = {
-    name                = "private_network"
+    name                = "prod_network"
     location            = "centralindia"
     resource_group_name = "todo-rg"
     address_space       = ["10.0.0.0/16"]
     dns_servers         = ["8.8.8.8", "1.1.1.1"]
 
   }
+  vnet_dev = {
+    name                = "dev_network"
+    location            = "centralindia"
+    resource_group_name = "todo-rg"
+    address_space       = ["172.0.0.0/16"]
+    dns_servers         = ["8.8.8.8", "1.1.1.1"]
+
+  }
 }
 
 subnet = {
-  Subnet_prod = {
+  Subnet_prod1 = {
     name                 = "frontendsubnet"
     resource_group_name  = "todo-rg"
-    virtual_network_name = "private_network"
+    virtual_network_name = "prod_network"
     address_prefixes     = ["10.0.1.0/24"]
   }
-  Subnet_dev = {
+  Subnet_prod2 = {
     name                 = "backendsubnet"
     resource_group_name  = "todo-rg"
-    virtual_network_name = "private_network"
+    virtual_network_name = "prod_network"
     address_prefixes     = ["10.0.2.0/24"]
   }
-  Subnet_qa = {
+  Subnet_prod3 = {
     name                 = "databasesubnet"
     resource_group_name  = "todo-rg"
-    virtual_network_name = "private_network"
+    virtual_network_name = "prod_network"
     address_prefixes     = ["10.0.3.0/24"]
+  }
+
+  Subnet_dev1 = {
+    name                 = "frontendsubnet"
+    resource_group_name  = "todo-rg"
+    virtual_network_name = "dev_network"
+    address_prefixes     = ["172.0.1.0/24"]
+  }
+  Subnet_dev2 = {
+    name                 = "backendsubnet"
+    resource_group_name  = "todo-rg"
+    virtual_network_name = "dev_network"
+    address_prefixes     = ["172.0.2.0/24"]
+  }
+  Subnet_dev3 = {
+    name                 = "databasesubnet"
+    resource_group_name  = "todo-rg"
+    virtual_network_name = "dev_network"
+    address_prefixes     = ["172.0.3.0/24"]
   }
 }
 
@@ -93,6 +120,40 @@ nsg_rule = {
     network_security_group_name = "vmnsgformyprivateserver"
 
   }
+}
+
+bastion = {
+  dev_bastion = {
+    name     = "devbastion"
+    location = "centralindia"
+
+    # below is ipconfiguration
+    ip_conf_name   = "pudbastion"
+    pub_name       = "vm_public_ip_nginx"
+    pub_rg_name    = "todo-rg"
+    sub_name       = "frontendsubnet"
+    subnet_rg_name = "todo-rg"
+    vnet_name      = "dev_network"
+  }
+}
+
+
+peering = {
+  prodnetworktodev = {
+    name = "prodnetworktodev"
+    virtual_network_name = "prod_network"
+    ## data peering below
+    remote_name = "dev_network"
+    vnet_rg = "todo-rg"
+  }
+   devnetworktoprod = {
+    name = "devnetworktoprod"
+    virtual_network_name = "dev_network"
+    ## data peering below
+    remote_name = "prod_network"
+    vnet_rg = "todo-rg"
+  }
+
 }
 
 

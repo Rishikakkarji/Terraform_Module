@@ -67,7 +67,19 @@ module "Linux_vm" {
   vm_linux   = var.vm_linux
 }
 
+module "bastion" {
+  source     = "../../child module/bastion"
+  depends_on = [module.Linux_vm]
+  bastion    = var.bastion
 
+}
+
+module "peering" {
+  source  = "../../child module/vpc peering"
+  depends_on = [ module.vnet_child ]
+  peering = var.peering
+
+}
 
 # output "publicip_terminal" {
 #   value = module.publicip["prod"].public_ip_name
