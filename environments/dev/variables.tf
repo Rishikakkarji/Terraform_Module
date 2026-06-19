@@ -15,6 +15,8 @@ variable "nic" {}
 
 variable "pub" {}
 
+variable "nsg" {}
+
 # variable "vm_linux_app" {
 #   type = map(object({
 #     # VM Variable
@@ -45,20 +47,6 @@ variable "pub" {}
 
 # }
 
-# variable "nsg_detail" {
-#   type = map(object({
-#     name                       = string
-#     nsg_name                   = string
-#     priority                   = number
-#     direction                  = string
-#     access                     = string
-#     protocol                   = string
-#     destination_port_range     = string
-#     source_port_range          = string
-#     source_address_prefix      = string
-#     destination_address_prefix = string
-#   }))
 
-# }
 
 

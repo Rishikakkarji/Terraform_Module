@@ -23,34 +23,39 @@ module "sg_container" {
 
 #Vnet Module
 module "vnet_child" {
-  source = "../../child module/vnet"
-  depends_on = [ module.rg ]
-  vnet   = var.vnet
+  source     = "../../child module/vnet"
+  depends_on = [module.rg]
+  vnet       = var.vnet
 }
 
 
 # Subnet Module
 module "subnet" {
-  source          = "../../child module/subnet"
-  depends_on = [ module.vnet_child ]
-  subnet = var.subnet
+  source     = "../../child module/subnet"
+  depends_on = [module.vnet_child]
+  subnet     = var.subnet
 }
 
 
 # # Nic Module
 module "vm_nic" {
-  source           = "../../child module/nic card"
-  depends_on = [ module.subnet ]
-  nic = var.nic
+  source     = "../../child module/nic card"
+  depends_on = [module.subnet]
+  nic        = var.nic
 
 }
 
 # Public IP for vm
 module "publicip" {
-  source         = "../../child module/public ip"
-  depends_on = [ module.subnet ]
-  pub = var.pub
+  source     = "../../child module/public ip"
+  depends_on = [module.subnet]
+  pub        = var.pub
 
+}
+
+module "nsg" {
+  source = "../../child module/nsg"
+  nsg    = var.nsg
 }
 
 # # Linux Module
@@ -88,26 +93,6 @@ module "publicip" {
 #   custom_data = base64encode(
 #     file("${path.module}/../../child module/scripts/nginx.sh")
 #   )
-
-# }
-
-# module "nsg_attach_nic" {
-#   source      = "../../child module/nsg"
-#   for_each    = var.nsg_detail
-#   nsg_name    = each.value.name
-#   rg_name     = module.rg[each.key].prod_rg_name
-#   rg_location = module.rg[each.key].prod_rg_location
-
-#   # nsg rule start from below
-#   nsg_rule_name      = each.value.nsg_name
-#   priority_number    = each.value.priority
-#   inbound_outbound   = each.value.direction
-#   allow_deny         = each.value.access
-#   tcp_udp            = each.value.protocol
-#   port_range         = each.value.destination_port_range
-#   source_port        = each.value.source_port_range
-#   source_prefix      = each.value.source_address_prefix
-#   destination_prefix = each.value.destination_address_prefix
 
 # }
 

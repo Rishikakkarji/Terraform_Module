@@ -1,15 +1,15 @@
 nic = {
   "prod" = {
-   nic_name = "vm_nic"
-   location = "centralindia"
-   resource_group_name = "todo-rg"
-   ip_name = "vm_pub"
-   private_ip_address_allocation = "Dynamic"
-   subnet_name = "frontendsubnet"
-   subnet_rg = "todo-rg"
-   pub_rg = "todo-rg"
-   pub_name = "vm_public_ip_nginx"
-   vn_name = "private_network"
+    nic_name                      = "vm_nic"
+    location                      = "centralindia"
+    resource_group_name           = "todo-rg"
+    ip_name                       = "vm_pub"
+    private_ip_address_allocation = "Dynamic"
+    subnet_name                   = "frontendsubnet"
+    subnet_rg                     = "todo-rg"
+    pub_rg                        = "todo-rg"
+    pub_name                      = "vm_public_ip_nginx"
+    vn_name                       = "private_network"
 
   }
 }
