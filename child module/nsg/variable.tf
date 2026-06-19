@@ -4,8 +4,10 @@ variable "nsg" {
     location                   = string
     resource_group_name        = string
     security_name              = string
-    priority                   = string
+    priority                   = number
     direction                  = string
+    access                     = string
+    protocol                   = string
     destination_port_range     = string
     source_port_range          = string
     source_address_prefix      = string
