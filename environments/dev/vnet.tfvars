@@ -60,12 +60,20 @@ subnet = {
 
 pub = {
   "pub_prod" = {
-    name                = "vm_public_ip_nginx"
+    name                = "bastion_public_ip_nginx"
     resource_group_name = "todo-rg"
     location            = "centralindia"
     allocation_method   = "Static"
 
   }
+   "nat_prod" = {
+    name                = "nat_public_ip"
+    resource_group_name = "todo-rg"
+    location            = "centralindia"
+    allocation_method   = "Static"
+
+  }
+   
 }
 
 nsg = {
@@ -129,7 +137,7 @@ bastion = {
 
     # below is ipconfiguration
     ip_conf_name   = "pubbastion"
-    pub_name       = "vm_public_ip_nginx"
+    pub_name       = "bastion_public_ip_nginx"
     pub_rg_name    = "todo-rg"
     sub_name       = "AzureBastionSubnet"
     subnet_rg_name = "todo-rg"
@@ -167,6 +175,31 @@ nsg-to-nic = {
   }
 }
 
+nat = {
+  nat_gateways = {
+    name = "nat_gateway_subnet"
+    location = "centralindia"
+    resource_group_name = "todo-rg"
+    sku_name = "Standard"
+    idle_timeout_in_minutes = 10
+    # zones = ["1"]
+  }
+}
+
+nat_id = {
+  nat_id_subnet_public = {
+        # below is public variable code for id
+    pub_name = "nat_public_ip"
+    pub_rg_name = "todo-rg"
+    # below is nat variable code for id
+    nat_name = "nat_gateway_subnet"
+    nat_rg_name = "todo-rg"
+     # below is subnet id variable code for id
+     subnet_name = "frontendsubnet"
+     subnet_rg_name = "todo-rg"
+     subnet_vnet_name = "prod_network"
+  }
+}
 
 
 

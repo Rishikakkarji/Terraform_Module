@@ -11,7 +11,7 @@ sg_map = {
 sg_container = {
   prod1 = {
     sg_name_container = "prodtfstatecontainer"
-    sg_access_type    = "private"
+    # sg_access_type    = "private"
     rg_name           = "todo-rg"
     sg_map            = "sgaccount856"
   }

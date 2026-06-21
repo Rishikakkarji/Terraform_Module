@@ -23,3 +23,7 @@ variable "bastion" {}
 variable "peering" {}
 
 variable "nsg-to-nic" {}
+
+variable "nat" {}
+
+variable "nat_id" {}

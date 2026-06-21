@@ -59,6 +59,11 @@ module "nsg" {
   source     = "../../child module/nsg"
   depends_on = [module.rg, module.vm_nic]
   nsg        = var.nsg
+}
+
+module "nsg-rule" {
+  source     = "../../child module/nsg-rule"
+  depends_on = [module.nsg]
   nsg_rules  = var.nsg_rule
 }
 
@@ -86,7 +91,20 @@ module "peering" {
 module "nsg-to-nic" {
   source = "../../child module/attach-nsg-to-nic"
   depends_on = [ module.nsg, module.vm_nic ]
-  nsg-to-nic = var.nsg-to-nic
+  nsg-to-nic = var.nsg-to-nic 
+}
+
+module "nat_gateway" {
+  source = "../../child module/nat_gateway"
+  depends_on = [ module.subnet ]
+  nat = var.nat
+  
+}
+
+module "nat_id" {
+  source = "../../child module/associate_to_subnet_publicip"
+  depends_on = [ module.nat_gateway, module.publicip ]
+  nat_id = var.nat_id
   
 }
 

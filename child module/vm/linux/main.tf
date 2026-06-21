@@ -13,7 +13,9 @@ resource "azurerm_linux_virtual_machine" "vm_linux" {
 
   disable_password_authentication = each.value.disable_password_authentication
 
-  # custom_data = each.value.custom_data
+  custom_data = base64encode(
+  file("${path.module}/../../scripts/nginx.sh")
+)
 
   source_image_reference {
     publisher = each.value.publisher
