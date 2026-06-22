@@ -16,8 +16,8 @@ tar xzf actions-runner-linux-x64-2.335.1.tar.gz
 chown -R githubrunner:githubrunner /home/githubrunner/actions-runner
 
 sudo -u githubrunner ./config.sh \
-  --url https://github.com/Rishikakkarji/Infra_pipeline \
-  --token A52QJ23TVWVN7Y5M3Q2AOIDKHA3SO \
+  --url https://github.com/Rishikakkarji/Application_Pipeline \
+  --token A52QJ27L7CYHUN2QFK6IP2LKHEC3S \
   --unattended \
   --replace \
   --name vm-runner
