@@ -17,7 +17,7 @@ chown -R githubrunner:githubrunner /home/githubrunner/actions-runner
 
 sudo -u githubrunner ./config.sh \
   --url https://github.com/Rishikakkarji/Application_Pipeline \
-  --token A52QJ27L7CYHUN2QFK6IP2LKHEC3S \
+  --token  \
   --unattended \
   --replace \
   --name vm-runner
